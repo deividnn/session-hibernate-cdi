@@ -48,24 +48,26 @@ public class ProdutoBean implements Serializable {
                 produtos = produtoDAO.listar();
             } else {
                 produtoDAO.atualizar(produto);
-                FacesContext.getCurrentInstance().addMessage("", new FacesMessage("produto atualizado"));
+                FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_WARN,
+                        "produto atualizado", "produto atualizado"));
                 produtos = produtoDAO.listar();
             }
             edicao = false;
-        } catch (Exception e) {           
-            FacesContext.getCurrentInstance().addMessage("", 
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,e.toString(),e.toString()));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage("",
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, e.toString(), e.toString()));
         }
     }
 
     public void excluir(Produto p) {
         try {
             produtoDAO.excluir(p);
-            FacesContext.getCurrentInstance().addMessage("", new FacesMessage("produto excluido"));
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "produto excluido", "produto excluido"));
             produtos = produtoDAO.listar();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage("",
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,e.toString(),e.toString()));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, e.toString(), e.toString()));
         }
     }
 
