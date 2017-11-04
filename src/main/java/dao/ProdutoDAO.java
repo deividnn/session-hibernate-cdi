@@ -56,7 +56,7 @@ public class ProdutoDAO implements Serializable {
     @SuppressWarnings("unchecked")
     public List<Produto> listar() {
         List<Produto> produtos = sessionFactory.getCurrentSession().
-                createQuery("from Produto").list();
+                createQuery("select vo from Produto vo order by id desc").list();
         return produtos;
     }
 

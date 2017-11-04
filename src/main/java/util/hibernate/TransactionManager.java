@@ -13,7 +13,6 @@ import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
@@ -33,15 +32,19 @@ public class TransactionManager {
             tx = session.beginTransaction();
             return context.proceed();
         } catch (Exception e) {
-            tx.rollback();
+            if (tx != null) {
+                tx.rollback();
+            }
             throw e;
         } finally {
-            if (tx.getStatus().equals(TransactionStatus.ACTIVE)) {
-                try {
-                    tx.commit();
-                } catch (Exception e) {
-                    tx.rollback();
-                    throw e;
+            if (tx != null) {
+                if (tx.getStatus().equals(TransactionStatus.ACTIVE)) {
+                    try {
+                        tx.commit();
+                    } catch (Exception e) {
+                        tx.rollback();
+                        throw e;
+                    }
                 }
             }
         }
