@@ -13,6 +13,7 @@ import entidades.Produto;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.PersistenceException;
 import util.hibernate.HibernateSF;
 import util.hibernate.Transactional;
 
@@ -25,7 +26,7 @@ public class ProdutoDAO implements Serializable {
     public void salvar(Produto produto) throws ErroException {
         try {
             sessionFactory.getCurrentSession().save(produto);
-        } catch (Exception e) {
+        } catch (PersistenceException e) {
             throw new ErroException("erro ao salvar.");
         }
     }
@@ -34,7 +35,7 @@ public class ProdutoDAO implements Serializable {
     public void atualizar(Produto produto) throws ErroException {
         try {
         sessionFactory.getCurrentSession().update(produto);
-        } catch (Exception e) {
+        } catch (PersistenceException e) {
             throw new ErroException("erro ao atualizar.");
         }
     }
@@ -43,7 +44,7 @@ public class ProdutoDAO implements Serializable {
     public void excluir(Produto produto) throws ErroException {
         try{
         sessionFactory.getCurrentSession().delete(produto);
-        } catch (Exception e) {
+        } catch (PersistenceException e) {
             throw new ErroException("erro ao excluir.");
         }
     }
