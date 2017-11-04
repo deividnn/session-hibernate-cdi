@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/session-hibernate-cdi">
+<Context path="/session-hibernate-cdi" reloadable="false">
     <!-- disables storage of sessions across restarts --> 
     <Manager pathname=""/>
     <Resource name="BeanManager" auth="Container" 

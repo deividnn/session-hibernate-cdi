@@ -5,6 +5,7 @@
  */
 package beans;
 
+import dao.ErroException;
 import dao.ProdutoDAO;
 import entidades.Produto;
 import java.io.Serializable;
@@ -43,15 +44,15 @@ public class ProdutoBean implements Serializable {
             produto.setDescricao(produto.getDescricao().toUpperCase());
             if (produto.getId() == null) {
                 produtoDAO.salvar(produto);
-                FacesUtil.mensagem("produto salvo");
+                FacesUtil.mensagem("produto "+produto.getDescricao()+" salvo");
                 produtos = produtoDAO.listar();
             } else {
                 produtoDAO.atualizar(produto);
-                FacesUtil.mensagemAviso("produto atualizado");
+                FacesUtil.mensagemAviso("produto "+produto.getDescricao()+" atualizado");
                 produtos = produtoDAO.listar();
             }
             edicao = false;
-        } catch (Exception e) {
+        } catch (ErroException e) {
             FacesUtil.mensagemErro(e.toString());
         }
     }
@@ -59,9 +60,9 @@ public class ProdutoBean implements Serializable {
     public void excluir(Produto p) {
         try {
             produtoDAO.excluir(p);
-            FacesUtil.mensagemAviso("produto excluido");
+            FacesUtil.mensagemAviso("produto "+produto.getDescricao()+" excluido");
             produtos = produtoDAO.listar();
-        } catch (Exception e) {
+        } catch (ErroException e) {
             FacesUtil.mensagemErro(e.toString());
         }
     }

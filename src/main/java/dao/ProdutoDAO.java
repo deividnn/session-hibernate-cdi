@@ -22,18 +22,30 @@ public class ProdutoDAO implements Serializable {
     private HibernateSF sessionFactory;
 
     @Transactional
-    public void salvar(Produto produto) {
-        sessionFactory.getCurrentSession().save(produto);
+    public void salvar(Produto produto) throws ErroException {
+        try {
+            sessionFactory.getCurrentSession().save(produto);
+        } catch (Exception e) {
+            throw new ErroException("erro ao salvar.");
+        }
     }
 
     @Transactional
-    public void atualizar(Produto produto) {
+    public void atualizar(Produto produto) throws ErroException {
+        try {
         sessionFactory.getCurrentSession().update(produto);
+        } catch (Exception e) {
+            throw new ErroException("erro ao atualizar.");
+        }
     }
 
     @Transactional
-    public void excluir(Produto produto) {
+    public void excluir(Produto produto) throws ErroException {
+        try{
         sessionFactory.getCurrentSession().delete(produto);
+        } catch (Exception e) {
+            throw new ErroException("erro ao excluir.");
+        }
     }
 
     public Produto pegar(int id) {
