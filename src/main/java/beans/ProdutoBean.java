@@ -11,11 +11,10 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import util.jsf.FacesUtil;
 
 /**
  *
@@ -44,30 +43,26 @@ public class ProdutoBean implements Serializable {
             produto.setDescricao(produto.getDescricao().toUpperCase());
             if (produto.getId() == null) {
                 produtoDAO.salvar(produto);
-                FacesContext.getCurrentInstance().addMessage("", new FacesMessage("produto salvo"));
+                FacesUtil.mensagem("produto salvo");
                 produtos = produtoDAO.listar();
             } else {
                 produtoDAO.atualizar(produto);
-                FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_WARN,
-                        "produto atualizado", "produto atualizado"));
+                FacesUtil.mensagemAviso("produto atualizado");
                 produtos = produtoDAO.listar();
             }
             edicao = false;
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage("",
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, e.toString(), e.toString()));
+            FacesUtil.mensagemErro(e.toString());
         }
     }
 
     public void excluir(Produto p) {
         try {
             produtoDAO.excluir(p);
-            FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_WARN,
-                    "produto excluido", "produto excluido"));
+            FacesUtil.mensagemAviso("produto excluido");
             produtos = produtoDAO.listar();
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage("",
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, e.toString(), e.toString()));
+            FacesUtil.mensagemErro(e.toString());
         }
     }
 
