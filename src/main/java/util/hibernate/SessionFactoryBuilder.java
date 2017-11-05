@@ -25,7 +25,7 @@ public class SessionFactoryBuilder {
     private SessionFactory sessionFactory;
 
     @PostConstruct
-    void buildSessionFactory() {
+    void buildSessionFactory() {     
         final StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
         try {
             Metadata metadata = new MetadataSources(standardServiceRegistry).buildMetadata();

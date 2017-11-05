@@ -59,8 +59,9 @@ public class ProdutoBean implements Serializable {
 
     public void excluir(Produto p) {
         try {
+            String desc =p.getDescricao();
             produtoDAO.excluir(p);
-            FacesUtil.mensagemAviso("produto "+produto.getDescricao()+" excluido");
+            FacesUtil.mensagemAviso("produto "+desc+" excluido");
             produtos = produtoDAO.listar();
         } catch (ErroException e) {
             FacesUtil.mensagemErro(e.toString());
