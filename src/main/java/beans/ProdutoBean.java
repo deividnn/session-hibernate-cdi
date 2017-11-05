@@ -5,7 +5,6 @@
  */
 package beans;
 
-import dao.ErroException;
 import dao.ProdutoDAO;
 import entidades.Produto;
 import java.io.Serializable;
@@ -52,7 +51,7 @@ public class ProdutoBean implements Serializable {
                 produtos = produtoDAO.listar();
             }
             edicao = false;
-        } catch (ErroException e) {
+        } catch (Exception e) {
             FacesUtil.mensagemErro(e.toString());
         }
     }
@@ -63,7 +62,7 @@ public class ProdutoBean implements Serializable {
             produtoDAO.excluir(p);
             FacesUtil.mensagemAviso("produto "+desc+" excluido");
             produtos = produtoDAO.listar();
-        } catch (ErroException e) {
+        } catch (Exception e) {
             FacesUtil.mensagemErro(e.toString());
         }
     }

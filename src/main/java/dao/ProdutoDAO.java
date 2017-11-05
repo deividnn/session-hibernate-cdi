@@ -9,6 +9,7 @@ package dao;
  *
  * @author deividnn
  */
+
 import entidades.Produto;
 import java.io.Serializable;
 import java.util.List;
@@ -22,30 +23,18 @@ public class ProdutoDAO implements Serializable {
     private HibernateSF sessionFactory;
 
     @Transactional
-    public void salvar(Produto produto) throws ErroException {
-        try {
-            sessionFactory.getCurrentSession().save(produto);
-        } catch (Exception e) {
-            throw new ErroException("erro ao salvar."+e.toString());
-        }
+    public void salvar(Produto produto) {
+        sessionFactory.getCurrentSession().save(produto);
     }
 
     @Transactional
-    public void atualizar(Produto produto) throws ErroException {
-        try {
+    public void atualizar(Produto produto) {
         sessionFactory.getCurrentSession().update(produto);
-        } catch (Exception e) {
-            throw new ErroException("erro ao atualizar."+e.toString());
-        }
     }
 
     @Transactional
-    public void excluir(Produto produto) throws ErroException {
-        try{
+    public void excluir(Produto produto) {
         sessionFactory.getCurrentSession().delete(produto);
-        } catch (Exception e) {
-            throw new ErroException("erro ao excluir."+e.toString());
-        }
     }
 
     public Produto pegar(int id) {
