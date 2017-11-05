@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
 import dao.ProdutoDAO;
@@ -17,7 +12,6 @@ import javax.inject.Named;
 import util.jsf.FacesUtil;
 
 /**
- *
  * @author deividnn
  */
 @Named
@@ -42,7 +36,7 @@ public class ProdutoBean implements Serializable {
             produto.setDatahora(Calendar.getInstance().getTime());
             produto.setDescricao(produto.getDescricao().toUpperCase());
             if (produto.getId() == null) {
-                produtoDAO.salvar(produto);
+                produtoDAO.inserir(produto);
                 FacesUtil.mensagem("produto "+produto.getDescricao()+" salvo");
                 produtos = produtoDAO.listar();
             } else {

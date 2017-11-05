@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
-
 /**
- *
  * @author deividnn
  */
-
 import entidades.Produto;
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +15,7 @@ public class ProdutoDAO implements Serializable {
     private HibernateSF sessionFactory;
 
     @Transactional
-    public void salvar(Produto produto) {
+    public void inserir(Produto produto) {
         sessionFactory.getCurrentSession().save(produto);
     }
 
