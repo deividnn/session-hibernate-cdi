@@ -62,6 +62,7 @@
 
             <p:dataTable value="#{produtoBean.produtos}"
                          var="p"
+                         rendered="#{produtoBean.edicao eq false}"
                          emptyMessage="nenhum produto cadastrado"
                          scrollable="true"
                          scrollHeight="400"
